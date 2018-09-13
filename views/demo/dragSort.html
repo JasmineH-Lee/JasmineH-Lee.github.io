@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片拖拽排序</title>
+</head>
+<body>
+  <div id="app">
+    <div class="wrap" style="display: flex; flex-flow: row nowrap; border: 1px solid #ccc; padding: 10px 0;">
+      <div class="img-list" v-for="(item, index) in imgs" :key="item.id" style="display: flex; flex-flow: row nowrap; background: #000; margin: 0 10px;" :id="index"
+      :draggable="true" @dragstart="dragStart($event, item)" @dragenter="dragEnter($event, item)" @drop="dropReturn($event)" @dragend="dragEnd($event)" @dragleave="dragLeave($event, item)">
+        <div>
+          <div style="color: #fff;">{{item.image_id}}</div>
+          <img :src="item.image_path" style="width: 80px; height: 80px;" :draggable="false"/>
+        </div>
+      </div>
+      <div style="width: 500px; height: 100px; border: 1px solid #333;">
+
+      </div>
+    </div>
+  </div>
+</body>
+<style>
+  .wrap {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+  .img-list {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data () {
+      return {
+        imgs: [
+          {
+            id: 3453,
+            image_id: '1324',
+            image_path: '../../images/123.jpeg',
+            sort: 1
+          },
+          {
+            id: 3455,
+            image_id: '1326',
+            image_path: '../../images/bread.jpeg',
+            sort: 2
+          },
+          {
+            id: 3457,
+            image_id: '1328',
+            image_path: '../../images/cake1.jpeg',
+            sort: 3
+          },
+          {
+            id: 3459,
+            image_id: '1330',
+            image_path: '../../images/cake2.jpeg',
+            sort: 4
+          },
+          {
+            id: 3461,
+            image_id: '1332',
+            image_path: '../../images/raspberry.jpg',
+            sort: 5
+          }
+        ],
+        sourceId: '',
+        targetId: '',
+        sourceImg: {}
+      }
+    },  
+    methods: {
+      dragStart (e, img) {
+        console.log('start drag')
+        console.log(img.image_id)
+        console.log(e.currentTarget.id)
+        this.sourceImg = img
+        this.sourceId = img.image_id
+        this.sourceIndex = e.currentTarget.id
+        e.currentTarget.style.background = 'green'
+        console.log(this.imgs)
+      },
+      drag (event) {
+        console.log('drag')
+      },
+      dragEnter (e, img) {
+        console.log('drag enter')
+        console.log(e.currentTarget.id)
+        this.targetIndex = e.currentTarget.id
+        this.targetId = img.image_id
+        if (this.targetId !== this.sourceId) {
+          this.imgs.splice(this.sourceIndex, 1)
+          e.currentTarget.style.background = 'yellow'
+          this.imgs.splice(this.targetIndex, 0, this.sourceImg)
+          console.log(this.imgs)
+          this.sourceIndex = e.currentTarget.id
+        }
+      },
+      dragLeave (e, img) {
+        console.log('drag leave')
+        e.currentTarget.style.background = '#000'
+        console.log(e.currentTarget)
+      },
+      drop (e) {
+        console.log('drop')
+      },
+      dropReturn (e) {
+        console.log('drop return')
+      },
+      dragEnd (e) {
+        console.log('drag end')
+        let i = 1;
+        this.imgs.forEach(val => {
+          val.sort = i;
+          i++;
+        })
+        console.log(this.imgs)
+      }
+    }
+  })
+</script>
+</html>
