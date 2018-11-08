@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>XSS攻击</title>
+</head>
+<body>
+    <div>
+        <input type="text" id="search-input">
+        <button id="search-btn">search</button>
+        <div>
+            您搜索的关键词是：<span id="key-span"></span>
+        </div>
+        <a href="" id="a-tag">跳转...</a>
+    </div>
+</body>
+<script>
+    function getSearchKeyWords () {
+        var params = location.search;
+        console.log(location);
+        console.log(params);
+        var key = params.slice(5,params.length);
+        console.log(key);
+        return key;
+    }
+    var keywords = getSearchKeyWords();
+    var ele = document.getElementById('key-span');
+    ele.innerHTML = keywords;
+    var inputEle = document.getElementById('search-input');
+    inputEle.value = keywords;
+
+    var searchBtn = document.getElementById('search-btn');
+    searchBtn.addEventListener('click', event => {
+        location.search = '?key=' + inputEle.value;
+        console.log('123');
+    })
+
+    var aEle = document.getElementById('a-tag');
+    aEle.href = keywords;
+
+</script>
+</html>
