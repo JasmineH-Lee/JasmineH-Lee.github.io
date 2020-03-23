@@ -5,6 +5,50 @@ clockPointerContext.translate(76,76);
 drawClockBg();
 setInterval(function(){drawClockPointer(clockPointerContext)}, 1000);
 
+var date = new Date();
+var dateStr = formatDate(date);
+var weekStr = formatWeek(date);
+var dateEle = document.getElementById('date_dis');
+dateEle.innerText = dateStr;
+var weekEle = document.getElementById('week_dis');
+weekEle.innerText = weekStr;
+
+
+function formatDate(date) {
+    var year = date.getFullYear();
+    var month = date.getMonth()+1;
+    var day = date.getDate();
+
+    if (month < 10) {
+        month = '0' + month;
+    }
+    if (day < 10) {
+        day = '0' + day;
+    }
+
+    return year + '-' + month + '-' + day; 
+}
+
+function formatWeek (date) {
+    var week = date.getDay();
+    switch(week) {
+        case 0: 
+          return '星期日'
+        case 1: 
+          return '星期一'
+        case 2: 
+          return '星期二'
+        case 3: 
+          return '星期三'
+        case 4: 
+          return '星期四'
+        case 5: 
+          return '星期五'
+        case 6: 
+          return '星期六'
+    }
+}
+
 function drawClockBg () {
     var clockBg = document.getElementById('clockBg');
     if(clockBg.getContext) {
