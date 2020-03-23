@@ -16,4 +16,32 @@ body {
 .date {
     margin-top: 152px;
     text-align: center;
+    color: #ed6663;
+}
+
+.intro {
+    margin-top: 150px;
+    color: #fae3d9;
+    font-size: 20px;
+}
+.intro .base_info .detail {
+    margin: 8px 0;
+}
+.intro .base_info .sign,.school {
+    opacity: .8;
+}
+.intro .avatar_box {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 8px solid #fae3d9;
+}
+.intro .avatar_box > .avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+.intro .base_info {
+    text-align: center;
 }

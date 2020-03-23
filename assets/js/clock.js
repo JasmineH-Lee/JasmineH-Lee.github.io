@@ -14,7 +14,7 @@ function drawClockBg () {
         clockBgContext.beginPath();
         clockBgContext.strokeStyle = "#ed6663";
         clockBgContext.fillStyle = "#ed6663";
-        clockBgContext.arc(76,76,75,0,2*Math.PI,false);
+        // clockBgContext.arc(76,76,75,0,2*Math.PI,false);
     
         // 变换原点 为时钟的中心
         clockBgContext.translate(76,76);
