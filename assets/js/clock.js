@@ -12,8 +12,8 @@ function drawClockBg () {
         var clockBgContext = clockBg.getContext('2d');
     
         clockBgContext.beginPath();
-        clockBgContext.strokeStyle = "#ed6663";
-        clockBgContext.fillStyle = "#ed6663";
+        clockBgContext.strokeStyle = "#fae3d9";
+        clockBgContext.fillStyle = "#fae3d9";
         // clockBgContext.arc(76,76,75,0,2*Math.PI,false);
     
         // 变换原点 为时钟的中心
@@ -35,7 +35,7 @@ function drawClockBg () {
                 clockBgContext.moveTo(0, -75);
             }
         }
-        clockBgContext.font="bold 11px Arial"
+        clockBgContext.font="11px Arial"
         clockBgContext.fillText('12', 0, -57);
         clockBgContext.fillText('3', 58, -0);
         clockBgContext.fillText('6', 0, 58);
